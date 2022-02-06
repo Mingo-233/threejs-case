@@ -6,7 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<script src="./libs/three.js"></script>
+	<script src="./libs/build/three.js"></script>
+	<script src="./libs/js/controls/OrbitControls.js"></script>
 	<style>
 		body {
 			/* 边距设置为0,设置溢出隐藏，完整的使用整个页面 */
@@ -33,16 +34,16 @@
 			// 设置输出canvas画面的大小
 			renderer.setSize(window.innerWidth, window.innerHeight)
 			// 设置渲染物体阴影
-			renderer.shadowMapEnabled = true
+			renderer.shadowMap.enabled = true
 			// 显示三维坐标系
-			var axes = new THREE.AxisHelper(20)
+			var axes = new THREE.AxesHelper(20)
 
 			// 添加坐标系到场景中
 			scene.add(axes);
 			// 创建地面的几何体
 			var planeGeometry = new THREE.PlaneGeometry(60, 60);
 			// 给地面物体上色
-			var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
+			var planeMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
 			// 创建地面
 			var plane = new THREE.Mesh(planeGeometry, planeMaterial)
 			// 物体移动位置
@@ -83,6 +84,10 @@
 			const spotLight = new THREE.SpotLight(0xffffff)
 			spotLight.position.set(8, 20, 60)
 			spotLight.castShadow = true;
+			// spotLight.angle = Math.PI /10;
+			// spotLight.shadow.penumbra = 0.05
+			// spotLight.shadow.mapSize.width = 1024;
+			// spotLight.shadow.mapSize.innerHeight = 1024;
 			scene.add(spotLight)
 			const spotLightHelper = new THREE.SpotLightHelper(spotLight);
 			scene.add(spotLightHelper);
@@ -95,6 +100,28 @@
 			// 将渲染器输出添加html元素中
 			document.getElementById('webgl-output').appendChild(renderer.domElement);
 			renderer.render(scene, camera)
+			let T0 = new Date()
+
+			//旋转
+			function render () {
+				let T1 = new Date()
+				let t = T1 - T0
+				T0 = T1
+				//  每一毫秒旋转0.001弧度
+				// boxCube.rotateY(0.001 * t)
+				renderer.render(scene, camera)
+				controls.update();
+				window.requestAnimationFrame(render)
+			}
+			// window.requestAnimationFrame(render)
+
+			// 创建controls对象;
+			var controls = new THREE.OrbitControls(camera, renderer.domElement)
+			controls.autoRotate = true
+			// 监听控制器的鼠标事件，执行渲染内容
+			controls.addEventListener('change', (e) => {
+				renderer.render(scene, camera)
+			})
 		}
 		window.onload = init
 	</script>
