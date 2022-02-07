@@ -136,7 +136,9 @@
 
       // 地球自转
       var axis = new THREE.Vector3(0, 1, 0);
+      console.log(elapsed);
       earth.rotateOnAxis(axis, (elapsed - oldtime) * Math.PI / 10);
+      moon.rotateOnAxis(axis, (elapsed - oldtime) * Math.PI / 100);
       renderer.render(scene, camera)
       labelRenderer.render(scene, camera)
       oldtime = elapsed;
