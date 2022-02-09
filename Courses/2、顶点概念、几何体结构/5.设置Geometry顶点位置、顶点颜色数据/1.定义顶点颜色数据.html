@@ -26,28 +26,45 @@
     /**
      * 创建网格模型
      */
-    var geometry = new THREE.SphereGeometry(60, 40, 20);
-    // var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-    //基础网格材质对象   不受光照影响  没有棱角感
-    // var material = new THREE.MeshBasicMaterial({
-    //   color: 0x0000ff,
-    //   wireframe:true,//线条模式渲染
-    //   // wireframeLinejoin:'miter'
-    // });
+    var geometry = new THREE.Geometry(); //声明一个几何体对象Geometry
 
-    // 与光照计算  漫反射   产生棱角感
-    // var material = new THREE.MeshLambertMaterial({
-    //   color: 0x00ff00,
-    // });
+    // Vector3向量对象表示顶点位置数据
+    var p1 = new THREE.Vector3(50, 0, 0); //顶点1坐标
+    var p2 = new THREE.Vector3(0, 70, 0); //顶点2坐标
+    var p3 = new THREE.Vector3(80, 70, 0); //顶点3坐标
+    
+    //顶点坐标添加到geometry对象
+    geometry.vertices.push(p1, p2, p3);
+    // Color对象表示顶点颜色数据
+    var color1 = new THREE.Color(0x00ff00); //顶点1颜色——绿色
+    var color2 = new THREE.Color(0xff0000); //顶点2颜色——红色
+    var color3 = new THREE.Color(0x0000ff); //顶点3颜色——蓝色
+    //顶点颜色数据添加到geometry对象
+    geometry.colors.push(color1, color2, color3);
 
-    // 与光照计算  高光效果（镜面反射）    产生棱角感
-    var material = new THREE.MeshPhongMaterial({
-      color: 0xff0000,
-      specular:0x444444,
-      shininess:40,
+    //材质对象
+    var material = new THREE.LineBasicMaterial({
+      // 使用顶点颜色数据渲染模型，不需要再定义color属性
+      // color: 0xff0000,
+      vertexColors: THREE.VertexColors, //以顶点颜色为准
     });
-    var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-    scene.add(mesh); //网格模型添加到场景中
+    //线条模型对象
+    var line = new THREE.Line(geometry, material);
+    scene.add(line); //线条对象添加到场景中
+
+    // 点渲染模式
+    // var material = new THREE.PointsMaterial({
+    //   // 使用顶点颜色数据渲染模型，不需要再定义color属性
+    //   // color: 0xff0000,
+    //   vertexColors: THREE.VertexColors, //以顶点颜色为准
+    //   size: 10.0 //点对象像素尺寸
+    // }); //材质对象
+    // var points = new THREE.Points(geometry, material); //点模型对象
+    // scene.add(points); //点对象添加到场景中
+
+    // 辅助坐标系
+    var AxesHelper = new THREE.AxesHelper(250);
+    // scene.add(AxesHelper);
     /**
      * 光源设置
      */

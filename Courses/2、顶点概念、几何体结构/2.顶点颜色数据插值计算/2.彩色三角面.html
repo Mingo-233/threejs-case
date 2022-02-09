@@ -26,33 +26,47 @@
     /**
      * 创建网格模型
      */
-    // 立方体网格模型
-    var geometry1 = new THREE.BoxGeometry(100, 100, 100);
-    var material1 = new THREE.MeshLambertMaterial({
-      color: 0x0000ff,//材质颜色
-      transparent:true,//开启透明度
-      opacity:0.4,//设置透明度具体值
-    }); //材质对象Material
-    var mesh1 = new THREE.Mesh(geometry1, material1); //网格模型对象Mesh
-    scene.add(mesh1); //网格模型添加到场景中
+    var geometry = new THREE.BufferGeometry(); //声明一个缓冲几何体对象
 
-    // 球体网格模型
-    var geometry2 = new THREE.SphereGeometry(60, 40, 40);
-    var material2 = new THREE.MeshLambertMaterial({
-      color: 0xff00f,
-    });
-    var mesh2 = new THREE.Mesh(geometry2, material2); //网格模型对象Mesh
-    mesh2.translateY(120); //球体网格模型沿Y轴正方向平移100
-    scene.add(mesh2);
+    //类型数组创建顶点位置position数据
+    var vertices = new Float32Array([
+      0, 0, 0, //顶点1坐标
+      50, 0, 0, //顶点2坐标
+      0, 100, 0, //顶点3坐标
 
-    // 圆柱网格模型
-    var geometry3 = new THREE.CylinderGeometry(50, 50, 100, 25);
-    var material3 = new THREE.MeshLambertMaterial({
-      color: 0xffff00
+      0, 0, 10, //顶点4坐标
+      0, 0, 100, //顶点5坐标
+      50, 0, 10, //顶点6坐标
+    ]);
+    // 创建属性缓冲区对象
+    var attribue = new THREE.BufferAttribute(vertices, 3); //3个为一组，作为一个顶点的xyz坐标
+    // 设置几何体attributes属性的位置position属性
+    geometry.attributes.position = attribue;
+
+
+    //类型数组创建顶点颜色color数据
+    var colors = new Float32Array([
+      1, 0, 0, //顶点1颜色
+      0, 1, 0, //顶点2颜色
+      0, 0, 1, //顶点3颜色
+
+      1, 1, 0, //顶点4颜色
+      0, 1, 1, //顶点5颜色
+      1, 0, 1, //顶点6颜色
+    ]);
+    // 设置几何体attributes属性的颜色color属性
+    geometry.attributes.color = new THREE.BufferAttribute(colors, 3); //3个为一组,表示一个顶点的颜色数据RGB
+
+
+    //材质对象
+    var material = new THREE.MeshBasicMaterial({
+      // 使用顶点颜色数据渲染模型，不需要再定义color属性
+      // color: 0xff0000,
+      vertexColors: THREE.VertexColors, //以顶点颜色为准
     });
-    var mesh3 = new THREE.Mesh(geometry3, material3); //网格模型对象Mesh
-    mesh3.translateX(120); //球体网格模型沿Y轴正方向平移100
-    scene.add(mesh3); //
+    // 网格模型  三角面渲染模式
+    var mesh = new THREE.Mesh(geometry, material); //网格模型
+    scene.add(mesh); //点对象添加到场景中
 
     // 辅助坐标系
     var axisHelper = new THREE.AxisHelper(250);
@@ -83,16 +97,18 @@
      */
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height); //设置渲染区域尺寸
-    renderer.setClearColor(0x666666, 1); //设置背景颜色
+    renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
     document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
 
     // 渲染函数
     function render() {
       renderer.render(scene, camera); //执行渲染操作
-      requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
     }
     render();
-    var controls = new THREE.OrbitControls(camera,renderer.domElement); //创建控件对象
+    //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+    controls.addEventListener('change', render);
   </script>
 
 </body>

@@ -26,37 +26,33 @@
     /**
      * 创建网格模型
      */
-    // 立方体网格模型
-    var geometry1 = new THREE.BoxGeometry(100, 100, 100);
-    var material1 = new THREE.MeshLambertMaterial({
-      color: 0x0000ff,//材质颜色
-      transparent:true,//开启透明度
-      opacity:0.4,//设置透明度具体值
-    }); //材质对象Material
-    var mesh1 = new THREE.Mesh(geometry1, material1); //网格模型对象Mesh
-    scene.add(mesh1); //网格模型添加到场景中
+    var geometry = new THREE.Geometry(); //声明一个几何体对象Geometry
 
-    // 球体网格模型
-    var geometry2 = new THREE.SphereGeometry(60, 40, 40);
-    var material2 = new THREE.MeshLambertMaterial({
-      color: 0xff00f,
-    });
-    var mesh2 = new THREE.Mesh(geometry2, material2); //网格模型对象Mesh
-    mesh2.translateY(120); //球体网格模型沿Y轴正方向平移100
-    scene.add(mesh2);
+    var p1 = new THREE.Vector3(50, 0, 0); //顶点1坐标
+    var p2 = new THREE.Vector3(0, 70, 0); //顶点2坐标
+    var p3 = new THREE.Vector3(80, 70, 0); //顶点3坐标
+    //顶点坐标添加到geometry对象
+    geometry.vertices.push(p1, p2, p3);
 
-    // 圆柱网格模型
-    var geometry3 = new THREE.CylinderGeometry(50, 50, 100, 25);
-    var material3 = new THREE.MeshLambertMaterial({
+    //材质对象
+    var material = new THREE.LineBasicMaterial({
       color: 0xffff00
     });
-    var mesh3 = new THREE.Mesh(geometry3, material3); //网格模型对象Mesh
-    mesh3.translateX(120); //球体网格模型沿Y轴正方向平移100
-    scene.add(mesh3); //
+    //线条模型对象
+    var line = new THREE.Line(geometry, material);
+    scene.add(line); //线条对象添加到场景中
 
+    // 点渲染模式
+    // var material = new THREE.PointsMaterial({
+    //   color: 0xff0000,
+    //   size: 5.0 //点对象像素尺寸
+    // }); //材质对象
+    // var points = new THREE.Points(geometry, material); //点模型对象
+    // scene.add(points); //点对象添加到场景中
+    
     // 辅助坐标系
-    var axisHelper = new THREE.AxisHelper(250);
-    scene.add(axisHelper);
+    var AxesHelper = new THREE.AxesHelper(250);
+    scene.add(AxesHelper);
     /**
      * 光源设置
      */
@@ -83,16 +79,18 @@
      */
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height); //设置渲染区域尺寸
-    renderer.setClearColor(0x666666, 1); //设置背景颜色
+    renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
     document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
 
     // 渲染函数
     function render() {
       renderer.render(scene, camera); //执行渲染操作
-      requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
     }
     render();
-    var controls = new THREE.OrbitControls(camera,renderer.domElement); //创建控件对象
+    //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
+    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
+    controls.addEventListener('change', render);
   </script>
 
 </body>
