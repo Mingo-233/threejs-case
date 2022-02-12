@@ -46,6 +46,9 @@
       0, 0, 1, //顶点1法向量
       0, 0, 1, //顶点2法向量
       0, 0, 1, //顶点3法向量
+      // 1, 0, 0, //顶点4法向量  像这里设置了3个x向的法向量，虽然这个面是朝向z的，但是相当于这个面朝向x
+      // 1, 0, 0, //顶点5法向量 
+      // 1, 0, 0, //顶点6法向量
 
       0, 1, 0, //顶点4法向量
       0, 1, 0, //顶点5法向量
@@ -65,6 +68,7 @@
     // 辅助坐标系
     var axisHelper = new THREE.AxisHelper(250);
     scene.add(axisHelper);
+
     /**
      * 光源设置
      */
@@ -75,6 +79,10 @@
     //环境光
     var ambient = new THREE.AmbientLight(0x444444);
     scene.add(ambient);
+
+    const sphereSize = 50;
+    const pointLightHelper = new THREE.PointLightHelper(point, sphereSize);
+    scene.add(pointLightHelper);
     /**
      * 相机设置
      */
@@ -95,12 +103,12 @@
     document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
 
     // 渲染函数
-    function render() {
+    function render () {
       renderer.render(scene, camera); //执行渲染操作
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>
