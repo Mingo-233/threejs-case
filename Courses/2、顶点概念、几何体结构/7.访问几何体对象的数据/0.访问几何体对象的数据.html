@@ -26,19 +26,19 @@
     /**
      * 创建网格模型
      */
-    var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-    console.log(geometry);
-    console.log('几何体顶点位置数据',geometry.vertices);
-    console.log('三角面数据',geometry.faces);
-
-    // var geometry = new THREE.PlaneBufferGeometry(100, 100); //创建一个立方体几何对象Geometry
+    // var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
     // console.log(geometry);
-    // console.log('几何体顶点位置数据',geometry.attributes.position);
-    // console.log('几何体索引数据',geometry.index);
+    // console.log('几何体顶点位置数据',geometry.vertices);
+    // console.log('三角面数据',geometry.faces);
+
+    var geometry = new THREE.PlaneBufferGeometry(100, 100); //创建一个立方体几何对象Geometry
+    console.log(geometry);
+    console.log('几何体顶点位置数据',geometry.attributes.position);
+    console.log('几何体索引数据',geometry.index);
 
     var material = new THREE.MeshLambertMaterial({
       color: 0x0000ff,
-      // wireframe:true,//线框模式渲染
+      wireframe:true,//线框模式渲染
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中

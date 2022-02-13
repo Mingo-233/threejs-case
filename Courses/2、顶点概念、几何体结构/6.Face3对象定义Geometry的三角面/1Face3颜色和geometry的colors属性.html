@@ -40,8 +40,8 @@
     var color2 = new THREE.Color(0xff0000); //顶点2颜色——红色
     var color3 = new THREE.Color(0x0000ff); //顶点3颜色——蓝色
     var color4 = new THREE.Color(0xffff00); //顶点3颜色——黄色
-    //顶点颜色数据添加到geometry对象
-    geometry.colors.push(color1, color2, color3, color4);
+    //顶点颜色数据添加到geometry对象  colors属性适用于点和线模型，这里使用的是面所以不会生效，面模型需要使用 color或者vertexColors
+    // geometry.colors.push(color1, color2, color3, color4);
 
     // Face3构造函数创建一个三角面
     var face1 = new THREE.Face3(0, 1, 2);
@@ -52,17 +52,17 @@
     // 设置三角面Face3三个顶点的法向量
     face1.vertexNormals.push(n1, n2, n3);
     // 设置三角面face1三个顶点的颜色
-    // face1.vertexColors = [
-    //   new THREE.Color(0xffff00),
-    //   new THREE.Color(0xff00ff),
-    //   new THREE.Color(0x00ffff),
-    // ]
+    face1.vertexColors = [
+      new THREE.Color(0xffff00),
+      new THREE.Color(0xff00ff),
+      new THREE.Color(0x00ffff),
+    ]
 
     // 三角面2
     var face2 = new THREE.Face3(0, 2, 3);
     // 设置三角面法向量
     face2.normal = new THREE.Vector3(0, -1, 0);
-    // face2.color = new THREE.Color(0x00ff00);
+    face2.color = new THREE.Color(0x00ff00);
 
     //三角面face1、face2添加到几何体中
     geometry.faces.push(face1, face2);
