@@ -32,7 +32,7 @@
     // 几何体沿着x轴平移50
     // geometry.translate(50, 0, 0);
     // 几何体绕着x轴旋转45度
-    // geometry.rotateX(Math.PI / 4);
+    geometry.rotateX(Math.PI / 4);
     // 居中：偏移的几何体居中
     // geometry.center();
     console.log(geometry.vertices);
@@ -52,6 +52,9 @@
     //环境光
     var ambient = new THREE.AmbientLight(0x444444);
     scene.add(ambient);
+        // 辅助坐标系
+        var axisHelper = new THREE.AxisHelper(250);
+    scene.add(axisHelper);
     /**
      * 相机设置
      */
