@@ -28,7 +28,7 @@
      */
     var geometry = new THREE.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
     var material = new THREE.MeshLambertMaterial({
-      color: 0x0000ff
+      color: 0x00ffff
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中
@@ -42,11 +42,17 @@
       color: 0xff00ff
     }); //材质对象Material
     var newMesh = new THREE.Mesh(geometry2, material2);
+    
     // 复制mesh的位置、旋转、矩阵等属性(不包含geometry和material属性)
     newMesh.copy(mesh);
-    //相比mesh而言，在平移
+    // 相比mesh而言，在平移
     newMesh.translateX(-50);
     scene.add(newMesh)
+
+    let aMesh = mesh.clone()
+    aMesh.translateY(-50);
+
+    scene.add(aMesh)
 
 
     // 坐标系辅助显示

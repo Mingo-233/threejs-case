@@ -43,16 +43,16 @@
     // mesh.translateX(100);
 
     //向量Vector3对象表示方向
-    // var axis = new THREE.Vector3(1, 1, 1);
-    // axis.normalize(); //向量归一化
+    var axis = new THREE.Vector3(1, 1, 1);
+    axis.normalize(); //向量归一化
     //沿着axis轴表示方向平移100
     // mesh.translateOnAxis(axis, 100);
-
+console.log(mesh.position);
     // 绕着Y轴旋转90度
     // mesh.rotateY(Math.PI / 2);
     // 绕axis轴旋转90度
-    // mesh.rotateOnAxis ( axis, Math.PI / 2 )
-    // console.log(mesh.rotation);//控制台查看：旋转方法，改变了rotation属性
+    mesh.rotateOnAxis ( axis, Math.PI / 2 )
+    console.log(mesh.rotation);//控制台查看：旋转方法，改变了rotation属性
 
     // 辅助坐标系
     var AxesHelper = new THREE.AxesHelper(250);

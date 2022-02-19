@@ -28,25 +28,25 @@
      */
     var geometry = new THREE.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
     var material = new THREE.MeshLambertMaterial({
-      color: 0x0000ff
+      color: 0x0000aa
     }); //材质对象Material
 
     // 共享材质和几何体数据，批量创建mesh
-    for (let i = 0; i < 10; i++) {
-      // 创建网格模型对象
-      var mesh = new THREE.Mesh(geometry, material);
-      // 平移该网格模型
-      mesh.translateY(i * 25);
-      scene.add(mesh)
-    }
-
-    // var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     // for (let i = 0; i < 10; i++) {
-    //   // 执行clone方法克隆mesh，注意不能var newMesh = mesh;
-    //   var newMesh = mesh.clone();
-    //   newMesh.translateX(i * 25);
-    //   scene.add(newMesh)
+    //   // 创建网格模型对象
+    //   var mesh = new THREE.Mesh(geometry, material);
+    //   // 平移该网格模型
+    //   mesh.translateY(i * 25);
+    //   scene.add(mesh)
     // }
+
+    var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+    for (let i = 0; i < 10; i++) {
+      // 执行clone方法克隆mesh，注意不能var newMesh = mesh;
+      var newMesh = mesh.clone();
+      newMesh.translateX(i * 25);
+      scene.add(newMesh)
+    }
 
 
 
