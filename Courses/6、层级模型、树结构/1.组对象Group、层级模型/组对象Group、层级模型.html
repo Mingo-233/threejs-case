@@ -26,28 +26,54 @@
     /**
      * 创建网格模型
      */
-    var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+    var geometry = new THREE.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
     var material = new THREE.MeshLambertMaterial({
       color: 0x0000ff
     }); //材质对象Material
-    var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-    scene.add(mesh); //网格模型添加到场景中
-    // mesh.translateX(100);//沿着x轴平移100
+
+    // 网格模型mesh沿着x轴方向阵列
+    var group1 = new THREE.Group();
+    // 共享材质和几何体数据，批量创建mesh
+    for (let i = 0; i < 10; i++) {
+      var mesh = new THREE.Mesh(geometry, material); // 创建网格模型对象
+      mesh.translateX(i * 25); // 平移该网格模型
+      // scene.add(mesh);//把网格模型插入到场景中
+      group1.add(mesh); //把网格模型插入到组group1中
+    }
+    // scene.add(group1)
+    // group1沿着y轴方向阵列
+    var group2 = new THREE.Group();
+    for (let i = 0; i < 10; i++) {
+      var newGroup = group1.clone(); // 克隆组group1
+      newGroup.translateY(i * 25); //沿着z轴平移
+      // scene.add(newGroup); //场景中插入组group1克隆的对象
+      group2.add(newGroup); //group2中插入组group1克隆的对象
+    }
+    // scene.add(group2)
+
+    // group2沿着z轴方向阵列
+    for (let i = 0; i < 10; i++) {
+      var newGroup = group2.clone(); // 克隆组group2
+      newGroup.translateZ(i * 25); //沿着z轴平移
+      scene.add(newGroup); //场景中插入组group2的克隆对象
+    }
+
+
+
+
+    // 坐标系辅助显示
+    var axesHelper = new THREE.AxesHelper(200);
+    scene.add(axesHelper);
     /**
      * 光源设置
      */
-    //环境光   环境光颜色RGB成分分别和物体材质颜色RGB成分分别相乘
-    var ambient = new THREE.AmbientLight(0x444444);
-    // 设置光照强度属性
-    // ambient.intensity = 0.3;
-    var ambient = new THREE.AmbientLight(0xffffff,0.3);//在构造函数中设置光照强度  (与上面设置光照强度属性等效，光强计算方式就是0xffffff*0.3)
-    scene.add(ambient);//环境光对象添加到scene场景中
     //点光源
     var point = new THREE.PointLight(0xffffff);
-    //设置点光源位置  光源对象和模型对象的position属性一样是Vector3对象
-    //PointLight的基类是Light  Light的基类是Object3D  点光源对象继承Object3D对象的位置属性position
-    point.position.set(400, 200, 300);
-    scene.add(point);
+    point.position.set(400, 200, 300); //点光源位置
+    scene.add(point); //点光源添加到场景中
+    //环境光
+    var ambient = new THREE.AmbientLight(0x444444);
+    scene.add(ambient);
     /**
      * 相机设置
      */
@@ -70,7 +96,6 @@
     // 渲染函数
     function render() {
       renderer.render(scene, camera); //执行渲染操作
-
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性

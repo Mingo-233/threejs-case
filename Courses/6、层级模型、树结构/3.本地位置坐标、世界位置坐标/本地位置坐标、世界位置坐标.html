@@ -26,28 +26,38 @@
     /**
      * 创建网格模型
      */
-    var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+    var geometry = new THREE.BoxGeometry(20, 20, 20); //创建一个立方体几何对象Geometry
     var material = new THREE.MeshLambertMaterial({
       color: 0x0000ff
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-    scene.add(mesh); //网格模型添加到场景中
-    // mesh.translateX(100);//沿着x轴平移100
+    mesh.position.set(50, 0, 0)
+    var group = new THREE.Group();
+    group.add(mesh); //网格模型添加到组中
+    group.position.set(50, 0, 0)
+    scene.add(group); //组添加到场景中
+
+    // 获得世界坐标
+
+    //该语句默认在threejs渲染的过程中执行  如果想获得世界矩阵属性、世界位置属性等属性，需要手动更新
+    scene.updateMatrixWorld(true);
+    var worldPosition = new THREE.Vector3();
+    mesh.getWorldPosition(worldPosition)
+    console.log('世界坐标',worldPosition);
+    console.log('本地坐标',mesh.position);
+    // 坐标系辅助显示
+    var axesHelper = new THREE.AxesHelper(200);
+    scene.add(axesHelper);
     /**
      * 光源设置
      */
-    //环境光   环境光颜色RGB成分分别和物体材质颜色RGB成分分别相乘
-    var ambient = new THREE.AmbientLight(0x444444);
-    // 设置光照强度属性
-    // ambient.intensity = 0.3;
-    var ambient = new THREE.AmbientLight(0xffffff,0.3);//在构造函数中设置光照强度  (与上面设置光照强度属性等效，光强计算方式就是0xffffff*0.3)
-    scene.add(ambient);//环境光对象添加到scene场景中
     //点光源
     var point = new THREE.PointLight(0xffffff);
-    //设置点光源位置  光源对象和模型对象的position属性一样是Vector3对象
-    //PointLight的基类是Light  Light的基类是Object3D  点光源对象继承Object3D对象的位置属性position
-    point.position.set(400, 200, 300);
-    scene.add(point);
+    point.position.set(400, 200, 300); //点光源位置
+    scene.add(point); //点光源添加到场景中
+    //环境光
+    var ambient = new THREE.AmbientLight(0x444444);
+    scene.add(ambient);
     /**
      * 相机设置
      */
@@ -70,7 +80,6 @@
     // 渲染函数
     function render() {
       renderer.render(scene, camera); //执行渲染操作
-
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
