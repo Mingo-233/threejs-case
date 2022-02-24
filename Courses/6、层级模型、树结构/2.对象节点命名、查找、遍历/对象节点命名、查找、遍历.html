@@ -55,7 +55,7 @@
     var personGroup = new THREE.Group();
     personGroup.name = "人"
     personGroup.add(headGroup, bodyGroup)
-    personGroup.translateY(50)
+    personGroup.translateY(60)
     scene.add(personGroup);
 
     // 遍历场景对象scene  obj：每次遍历的对象
@@ -67,9 +67,9 @@
       //   console.log('  ' + obj.name);
       //   obj.material.color.set(0xffff00);
       // }
-      // if (obj.name === "左眼" | obj.name === "右眼") {
-      //   obj.material.color.set(0x000000)
-      // }
+      if (obj.name === "左眼" | obj.name === "右眼") {
+        obj.material.color.set(0x000000)
+      }
       // 打印id属性
       // console.log(obj.id);
       // 打印该对象的父对象
@@ -82,11 +82,11 @@
     // console.log(headMesh.id);
     // console.log(leftEyeMesh.id);
     // console.log(rightEyeMesh.id);
-
+console.log(scene);
 
     // 遍历查找对象的子对象，返回name对应的对象（name是可以重名的，返回第一个）
-    // var nameNode = scene.getObjectByName ( "左腿" );
-    // nameNode.material.color.set(0xff0000);
+    var nameNode = scene.getObjectByName ( "脖子" );
+    nameNode.material.color.set(0xff0000);
     // 遍历查找对象的子对象，并返回id对应的对象
     // var idNode = scene.getObjectById ( 4 );
     // console.log(idNode);

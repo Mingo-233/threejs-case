@@ -31,10 +31,15 @@
       color: 0x0000ff
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-    mesh.position.set(50, 0, 0)
+    mesh.position.set(40, 0, 0)
+    console.log(mesh);
+
     var group = new THREE.Group();
+    console.log(group);
+
     group.add(mesh); //网格模型添加到组中
     group.position.set(50, 0, 0)
+    console.log(group);
     scene.add(group); //组添加到场景中
 
     // 获得世界坐标
@@ -42,9 +47,13 @@
     //该语句默认在threejs渲染的过程中执行  如果想获得世界矩阵属性、世界位置属性等属性，需要手动更新
     scene.updateMatrixWorld(true);
     var worldPosition = new THREE.Vector3();
+    var worldScale = new THREE.Vector3();
     mesh.getWorldPosition(worldPosition)
+    scene.getWorldScale(worldScale)
+     
     console.log('世界坐标',worldPosition);
     console.log('本地坐标',mesh.position);
+    console.log('世界缩放比',worldScale);
     // 坐标系辅助显示
     var axesHelper = new THREE.AxesHelper(200);
     scene.add(axesHelper);
