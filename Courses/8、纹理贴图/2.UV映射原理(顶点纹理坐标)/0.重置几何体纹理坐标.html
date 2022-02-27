@@ -26,9 +26,9 @@
 
     // var geometry = new THREE.BoxGeometry(100, 100, 100); //立方体
     // var geometry = new THREE.SphereGeometry(50, 25, 25); //球体
-    var geometry = new THREE.PlaneGeometry(204, 102); //矩形平面
-    // 矩形平面 设置细分数4,4
-    // var geometry = new THREE.PlaneGeometry(204, 102, 4, 4);
+    // var geometry = new THREE.PlaneGeometry(204, 102); //矩形平面
+    // 矩形平面 设置细分数2,2  此时将有8个三角面
+    var geometry = new THREE.PlaneGeometry(204, 102, 2, 2);
     // 查看默认的uv坐标
     console.log(geometry.faceVertexUvs[0]);
     /**
@@ -43,15 +43,17 @@
     /**
      * 局部三角面显示完整纹理贴图
      */
-    // var t0 = new THREE.Vector2(0, 1); //图片左下角
-    // var t1 = new THREE.Vector2(0, 0); //图片右下角
-    // var t2 = new THREE.Vector2(1, 0); //图片右上角
-    // var t3 = new THREE.Vector2(1, 1); //图片左上角
-    // var uv1 = [t0, t1, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
-    // var uv2 = [t1, t2, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
-    // // 设置第五、第六个三角面对应的纹理坐标
-    // geometry.faceVertexUvs[0][4] = uv1
-    // geometry.faceVertexUvs[0][5] = uv2
+    var t0 = new THREE.Vector2(0, 1); //图片左下角
+    var t1 = new THREE.Vector2(0, 0); //图片右下角
+    var t2 = new THREE.Vector2(1, 0); //图片右上角
+    var t3 = new THREE.Vector2(1, 1); //图片左上角
+    var uv1 = [t0, t1, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
+    var uv2 = [t1, t2, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
+    // 设置第五、第六个三角面对应的纹理坐标  
+    // （本来这个几何体第三、四个纹理坐标点对应的自己的位置是0.5,1 - 0.5，0.5 - 1，1，也就是贴图的这些坐标所对应的图片信息，
+    // 但是此时，我们把贴图 新的坐标赋给了几何体第三第四个纹理，所以原本几何体这个部位就显示了一张完整的但是缩小版的体贴）
+    geometry.faceVertexUvs[0][2] = uv1
+    geometry.faceVertexUvs[0][3] = uv2
 
     // TextureLoader创建一个纹理加载器对象，可以加载图片作为几何体纹理
     var textureLoader = new THREE.TextureLoader();
@@ -65,6 +67,9 @@
       var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
       scene.add(mesh); //网格模型添加到场景中
     })
+        // 坐标系辅助显示
+        var axesHelper = new THREE.AxesHelper(200);
+    scene.add(axesHelper);
     /**
      * 光源设置
      */
