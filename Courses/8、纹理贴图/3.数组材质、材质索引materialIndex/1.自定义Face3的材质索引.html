@@ -26,7 +26,7 @@
     /**
      * 创建网格模型
      */
-    var geometry = new THREE.PlaneGeometry(204, 102, 4, 4); //矩形平面
+    var geometry = new THREE.PlaneGeometry(204, 102, 2, 2); //矩形平面
     // 材质对象1
     var material1 = new THREE.MeshPhongMaterial({
       color: 0xffff3f,
@@ -37,11 +37,18 @@
       color: 0x0000ff,
       // wireframe:true,
     }); //材质对象Material
+        // 材质对象1
+        var material3 = new THREE.MeshPhongMaterial({
+      color: 0xff883f,
+      // wireframe:true,
+    })
     // 数组材质
-    var materialArr = [material1, material2];
+    var materialArr = [material1, material2,material3];
+    console.log(geometry.faces);
     // 设置几何体的材质索引(对于PlaneGeometry而言所有Face3的材质索引默认0)
     geometry.faces[4].materialIndex = 1;
     geometry.faces[5].materialIndex = 1;
+    geometry.faces[6].materialIndex = 2;
     var mesh = new THREE.Mesh(geometry, materialArr); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中
 
