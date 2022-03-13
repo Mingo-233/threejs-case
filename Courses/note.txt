@@ -10,3 +10,7 @@
 4 纹理贴图采集像素值RGB,光照贴图记录的也是rgb信息,那么两种rgb信息会不会冲突呢?
 
 不会的,因为 纹理贴图信息记录在    planeGeometry.faceVertexUvs[0],而光照贴图记录在    planeGeometry.faceVertexUvs[1]
+
+5 camera.lookat为什么没用？
+
+如果你使用了OrbitControls这个控制器时，控制摄像机的焦点就换成了controls.target，控制器目标，camera.lookat就失效了。
