@@ -23,13 +23,17 @@
      * 创建场景对象Scene
      */
     var scene = new THREE.Scene();
-    var geometry = new THREE.PlaneGeometry(108, 71); //矩形平面
+    var geometry = new THREE.PlaneGeometry(182, 71); //矩形平面
     // 创建video对象
     let video = document.createElement('video');
     video.src = "1086x716.mp4"; // 设置视频地址
     video.autoplay = "autoplay"; //要设置播放
     // video对象作为VideoTexture参数创建纹理对象
     var texture = new THREE.VideoTexture(video)
+    // texture.minFilter = THREE.LinearFilter
+    // texture.minFilter = THREE.NearestFilter
+
+     
     var material = new THREE.MeshPhongMaterial({
       map: texture, // 设置纹理贴图
     }); //材质对象Material
@@ -68,7 +72,8 @@
     function render() {
       renderer.render(scene, camera); //执行渲染操作
       requestAnimationFrame(render);
-      // texture.needsUpdate = true;
+      // 放在这边是因为 视频加载是异步的,不知道什么时候加载完成
+      texture.needsUpdate = true;
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性

@@ -35,7 +35,9 @@
 
     //创建一个平面几何体作为投影面
     var planeGeometry = new THREE.PlaneGeometry(300, 200);
+    // 这句话是我们需要明确的指定光照贴图的uv映射（将纹理的哪一部分应用在物体表面）这样才能将光照贴图的使用和其他的纹理分别开来。
     planeGeometry.faceVertexUvs[1] = planeGeometry.faceVertexUvs[0];
+    console.log(planeGeometry.faceVertexUvs);
     var textureLoader = new THREE.TextureLoader();
     // 加载光照贴图
     var textureLight = textureLoader.load('shadow.png');

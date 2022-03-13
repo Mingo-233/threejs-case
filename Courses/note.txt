@@ -6,3 +6,7 @@
 2 方向光的 position属性，并不代表光的位置，（把这个位置放在盒子的内部仍然会有光线）方向光的 position 和target 朝向 共同决定光的一个方向，因为两个点可以确定一个方向。
 
 3 所有物体参数变化（例如改变位置，平移旋转缩放）不会触发世界位置的坐标，只有在render更新的时候才会去更新所有的物体坐标。如果需要手动更新坐标， 执行scene.updateMatrixWorld(true);
+
+4 纹理贴图采集像素值RGB,光照贴图记录的也是rgb信息,那么两种rgb信息会不会冲突呢?
+
+不会的,因为 纹理贴图信息记录在    planeGeometry.faceVertexUvs[0],而光照贴图记录在    planeGeometry.faceVertexUvs[1]

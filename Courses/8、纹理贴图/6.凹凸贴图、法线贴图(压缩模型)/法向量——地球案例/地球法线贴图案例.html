@@ -12,9 +12,9 @@
     }
   </style>
   <!--引入three.js三维引擎-->
-  <script src="../http://www.yanhuangxueyuan.com/versions/threejsR92/build/three.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/build/three.js"></script>
   <!-- 引入threejs扩展控件OrbitControls.js -->
-  <script src="../http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/controls/OrbitControls.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/controls/OrbitControls.js"></script>
 </head>
 
 <body>
@@ -39,7 +39,7 @@
       map: texture, // 普通颜色纹理贴图
       normalMap: textureNormal, //法线贴图
       //设置深浅程度，默认值(1,1)。
-      normalScale: new THREE.Vector2(1.2, 1.2),
+      normalScale: new THREE.Vector2(3, 3),
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中
