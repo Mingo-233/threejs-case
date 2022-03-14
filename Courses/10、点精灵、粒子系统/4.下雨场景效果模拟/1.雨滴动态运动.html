@@ -31,7 +31,7 @@
     // 创建一个组表示所有的雨滴
     var group = new THREE.Group();
     // 批量创建雨滴精灵模型
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 200; i++) {
       var spriteMaterial = new THREE.SpriteMaterial({
         map: textureTree, //设置精灵纹理贴图
       });
@@ -46,6 +46,7 @@
       sprite.position.set(200 * k1, 200 * Math.random(), 200 * k2)
     }
     scene.add(group);//雨滴群组插入场景中
+    console.log(group);
     // 坐标系辅助显示
     var axesHelper = new THREE.AxesHelper(200);
     scene.add(axesHelper);

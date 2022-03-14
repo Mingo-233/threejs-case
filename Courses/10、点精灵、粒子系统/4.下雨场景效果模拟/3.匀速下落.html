@@ -83,6 +83,7 @@
     function render() {
       // 两次渲染时间间隔
       var t = clock.getDelta();
+      console.log(t);
       // 每次渲染遍历雨滴群组，刷新频率30~60FPS，两帧时间间隔16.67ms~33.33ms
       // 每次渲染都会更新雨滴的位置，进而产生动画效果
       group.children.forEach(sprite => {

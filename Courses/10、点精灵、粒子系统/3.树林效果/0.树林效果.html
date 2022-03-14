@@ -47,7 +47,7 @@
     // 加载树纹理贴图
     var textureTree = new THREE.TextureLoader().load("tree.png");
     // 批量创建表示一个树的精灵模型
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       var spriteMaterial = new THREE.SpriteMaterial({
         map:textureTree,//设置精灵纹理贴图
       });
@@ -59,11 +59,11 @@
       var k1 = Math.random() - 0.5;
       var k2 = Math.random() - 0.5;
       // 设置精灵模型位置，在xoz平面上随机分布
-      sprite.position.set(1000 * k1, 50, 1000 * k2)
+      sprite.position.set(800 * k1, 50, 800 * k2)
     }
     // 坐标系辅助显示
     var axesHelper = new THREE.AxesHelper(200);
-    // scene.add(axesHelper);
+    scene.add(axesHelper);
     /**
      * 光源设置
      */
