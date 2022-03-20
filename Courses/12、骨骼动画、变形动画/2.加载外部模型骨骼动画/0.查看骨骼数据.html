@@ -38,8 +38,8 @@
       // console.log(SkinnedMesh.skeleton.bones);
 
       // 骨骼辅助显示
-      // var skeletonHelper = new THREE.SkeletonHelper(SkinnedMesh);
-      // scene.add(skeletonHelper);
+      var skeletonHelper = new THREE.SkeletonHelper(SkinnedMesh);
+      scene.add(skeletonHelper);
 
       // 遍历骨骼模型中的骨关节Bone，并获得世界坐标
       // SkinnedMesh.traverse(function(elem) {

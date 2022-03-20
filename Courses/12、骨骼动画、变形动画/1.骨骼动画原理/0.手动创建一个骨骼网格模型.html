@@ -27,7 +27,7 @@
      * 创建骨骼网格模型SkinnedMesh
      */
     // 创建一个圆柱几何体，高度120，顶点坐标y分量范围[-60,60]
-    var geometry = new THREE.CylinderGeometry(5, 10, 120, 50, 300);
+    var geometry = new THREE.CylinderGeometry(5, 10, 130, 50, 300);
     geometry.translate(0, 60, 0); //平移后，y分量范围[0,120]
     console.log("name", geometry.vertices); //控制台查看顶点坐标
     //
@@ -56,6 +56,11 @@
         // 影响该顶点关节Bone3对应权重是1-(vertex.y-100)/20
         geometry.skinWeights.push(new THREE.Vector4(1 - (vertex.y - 100) / 20, 0, 0, 0));
       }
+      else if (120 < vertex.y && vertex.y <= 130) {
+        geometry.skinIndices.push(new THREE.Vector4(3, 0, 0, 0));
+        // 影响该顶点关节Bone3对应权重是1-(vertex.y-100)/20
+        geometry.skinWeights.push(new THREE.Vector4(1 - (vertex.y - 120) / 10, 0, 0, 0));
+      }
     }
     // 材质对象
     var material = new THREE.MeshPhongMaterial({
@@ -74,16 +79,19 @@
     var Bone1 = new THREE.Bone(); //关节1，用来作为根关节
     var Bone2 = new THREE.Bone(); //关节2
     var Bone3 = new THREE.Bone(); //关节3
+    var Bone4 = new THREE.Bone(); //关节3
     // 设置关节父子关系   多个骨头关节构成一个树结构
     Bone1.add(Bone2);
     Bone2.add(Bone3);
+    Bone3.add(Bone4);
     // 设置关节之间的相对位置
     //根关节Bone1默认位置是(0,0,0)
     Bone2.position.y = 60; //Bone2相对父对象Bone1位置
     Bone3.position.y = 40; //Bone3相对父对象Bone2位置
+    Bone4.position.y = 20; //Bone3相对父对象Bone2位置
 
     // 所有Bone对象插入到Skeleton中，全部设置为.bones属性的元素
-    var skeleton = new THREE.Skeleton([Bone1, Bone2, Bone3]); //创建骨骼系统
+    var skeleton = new THREE.Skeleton([Bone1, Bone2, Bone3,Bone4]); //创建骨骼系统
     // console.log(skeleton.bones);
     // 返回所有关节的世界坐标
     // skeleton.bones.forEach(elem => {
@@ -136,6 +144,7 @@
       // skeleton.bones[1].rotateX(Math.PI/20);
       skeleton.bones[1].rotation.x = 0.5;
       skeleton.bones[2].rotation.x = 0.5;
+      skeleton.bones[3].rotation.x = 0.5;
       renderer.render(scene, camera); //执行渲染操作
       requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
     }
