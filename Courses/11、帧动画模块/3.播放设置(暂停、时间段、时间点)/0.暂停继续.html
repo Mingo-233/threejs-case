@@ -56,7 +56,7 @@
      */
     var mixer = new THREE.AnimationMixer(mesh); //创建混合器
     var AnimationAction = mixer.clipAction(clip); //返回动画操作对象
-    // AnimationAction.timeScale = 5; //默认1，可以调节播放速度
+    AnimationAction.timeScale = 5; //默认1，可以调节播放速度
     // AnimationAction.loop = THREE.LoopOnce; //不循环播放
     // AnimationAction.clampWhenFinished=true;//暂停在最后一帧播放的状态
     AnimationAction.play(); //开始播放
