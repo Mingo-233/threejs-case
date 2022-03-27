@@ -40,9 +40,9 @@
       console.log(obj.animations)
       // obj.animations[0]：获得剪辑对象clip
       var AnimationAction=mixer.clipAction(obj.animations[0]);
-      // AnimationAction.timeScale = 1; //默认1，可以调节播放速度
-      // AnimationAction.loop = THREE.LoopOnce; //不循环播放
-      // AnimationAction.clampWhenFinished=true;//暂停在最后一帧播放的状态
+      AnimationAction.timeScale = 10; //默认1，可以调节播放速度
+      AnimationAction.loop = THREE.LoopOnce; //不循环播放
+      AnimationAction.clampWhenFinished=true;//暂停在最后一帧播放的状态
       AnimationAction.play();//播放动画
     })
     /**

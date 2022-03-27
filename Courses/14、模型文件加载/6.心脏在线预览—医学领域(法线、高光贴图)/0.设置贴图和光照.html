@@ -53,7 +53,7 @@
       // 设置高光贴图，一个网格模型不同的区域反射光线的能力不同
       var textureSpecular = textureLoader.load('./heart/Specular.png');
       mesh.material.specularMap = textureSpecular;
-      mesh.material.specular.set(0xffffff);// 高光反射颜色
+      mesh.material.specular.set(0xff0000);// 高光反射颜色
       mesh.material.shininess = 100;// 高光高亮程度，默认30
 
       // 设置环境贴图，反射周围环境，渲染更逼真
