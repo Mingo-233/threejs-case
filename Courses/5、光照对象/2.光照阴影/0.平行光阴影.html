@@ -72,12 +72,12 @@
     directionalLight.shadow.camera.top = 200;
     directionalLight.shadow.camera.bottom = -100;
     // 设置mapSize属性可以使阴影更清晰，不那么模糊
-    directionalLight.shadow.mapSize.set(1024,1024)
+    directionalLight.shadow.mapSize.set(1024, 1024)
     console.log(directionalLight.shadow);
     console.log(directionalLight.shadow.camera);
 
-    const helper = new THREE.DirectionalLightHelper( directionalLight, 5 );
-scene.add( helper );
+    const helper = new THREE.DirectionalLightHelper(directionalLight, 5);
+    scene.add(helper);
     /**
      * 相机设置
      */
@@ -90,8 +90,8 @@ scene.add( helper );
     camera.position.set(200, 300, 200); //设置相机位置
     camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
 
-    const helper2 = new THREE.CameraHelper( directionalLight.shadow.camera );
-scene.add( helper2 );
+    const helper2 = new THREE.CameraHelper(directionalLight.shadow.camera);
+    scene.add(helper2);
     /**
      * 创建渲染器对象
      */
@@ -107,7 +107,7 @@ scene.add( helper2 );
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>

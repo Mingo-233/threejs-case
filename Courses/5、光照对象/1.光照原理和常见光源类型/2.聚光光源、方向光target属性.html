@@ -49,14 +49,14 @@
     // 设置聚光光源位置
     spotLight.position.set(200, 200, 200);
     // 设置聚光光源发散角度
-    spotLight.angle = Math.PI / 6
+    spotLight.angle = Math.PI / 2
     // 聚光灯光源指向网格模型mesh2
     spotLight.target = mesh2;
 
     // 直接设置target属性  记得把目标对象添加到scene场景中
-    spotLight.target.position.set(-100,0,0);
-//     scene.add(spotLight.target)
-console.log(spotLight.target);
+    spotLight.target.position.set(-100, 0, 0);
+    scene.add(spotLight.target)
+    console.log(spotLight.target);
     // 创建一个用来设置target的Object3D对象
     // var targetObject = new THREE.Object3D();
     // targetObject.translateX(150);
@@ -90,7 +90,7 @@ console.log(spotLight.target);
       requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
     }
     render();
-    var controls = new THREE.OrbitControls(camera,renderer.domElement); //创建控件对象
+    var controls = new THREE.OrbitControls(camera, renderer.domElement); //创建控件对象
   </script>
 
 </body>

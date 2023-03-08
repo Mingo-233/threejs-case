@@ -59,14 +59,14 @@
     scene.add(personGroup);
 
     // 遍历场景对象scene  obj：每次遍历的对象
-    scene.traverse(function(obj) {
-      // if (obj.type === "Group") {
-      //   console.log(obj.name);
-      // }
-      // if (obj.type === "Mesh") {
-      //   console.log('  ' + obj.name);
-      //   obj.material.color.set(0xffff00);
-      // }
+    scene.traverse(function (obj) {
+      if (obj.type === "Group") {
+        console.log(obj.name);
+      }
+      if (obj.type === "Mesh") {
+        console.log('  ' + obj.name);
+        obj.material.color.set(0xffff00);
+      }
       if (obj.name === "左眼" | obj.name === "右眼") {
         obj.material.color.set(0x000000)
       }
@@ -82,10 +82,11 @@
     // console.log(headMesh.id);
     // console.log(leftEyeMesh.id);
     // console.log(rightEyeMesh.id);
-console.log(scene);
+    console.log(scene);
 
     // 遍历查找对象的子对象，返回name对应的对象（name是可以重名的，返回第一个）
-    var nameNode = scene.getObjectByName ( "脖子" );
+    var nameNode = scene.getObjectByName("脖子");
+    console.log(nameNode);
     nameNode.material.color.set(0xff0000);
     // 遍历查找对象的子对象，并返回id对应的对象
     // var idNode = scene.getObjectById ( 4 );
@@ -150,7 +151,7 @@ console.log(scene);
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>

@@ -57,7 +57,7 @@
     // 设置聚光光源位置
     spotLight.position.set(50, 90, 50);
     // 设置聚光光源发散角度
-    spotLight.angle = Math.PI /6
+    spotLight.angle = Math.PI / 6
     scene.add(spotLight); //光对象添加到scene场景中
     // 设置用于计算阴影的光源对象
     spotLight.castShadow = true;
@@ -65,6 +65,7 @@
     spotLight.shadow.camera.near = 1;
     spotLight.shadow.camera.far = 300;
     spotLight.shadow.camera.fov = 20;
+    console.log(spotLight.shadow);
     // 聚光光源辅助显示
     var spotLightHelper = new THREE.SpotLightHelper(spotLight);
     scene.add(spotLightHelper);
@@ -93,7 +94,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>
