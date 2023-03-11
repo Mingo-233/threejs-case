@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden; //隐藏body窗口区域滚动条
+      overflow: hidden;
     }
   </style>
   <!--引入three.js三维引擎-->
@@ -32,15 +32,21 @@
       new THREE.Vector3(70, 40, 0),
       new THREE.Vector3(80, -40, 0)
     ]);
+    // path — Curve - 一个由基类Curve继承而来的3D路径。 Default is a quadratic bezier curve.
+    //     tubularSegments — Integer - 组成这一管道的分段数，默认值为64。
+    //   radius — Float - 管道的半径，默认值为1。
+    //   radialSegments — Integer - 管道横截面的分段数目，默认值为8。
+    //   closed — Boolean 管道的两端是否闭合，默认值为false。
     var tubeGeometry = new THREE.TubeGeometry(curve, 100, 0.6, 50, false);
     var textureLoader = new THREE.TextureLoader();
     var texture = textureLoader.load('run.jpg');
     // 设置阵列模式为 RepeatWrapping
     texture.wrapS = THREE.RepeatWrapping
-    texture.wrapT=THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
     // 设置x方向的偏移(沿着管道路径方向)，y方向默认1
     //等价texture.repeat= new THREE.Vector2(20,1)
     texture.repeat.x = 20;
+    console.log(texture.repeat);
     var tubeMaterial = new THREE.MeshPhongMaterial({
       map: texture,
       transparent: true,
@@ -112,9 +118,10 @@
       // 使用加减法可以设置不同的运动方向
       // 设置纹理偏移
       texture.offset.x -= 0.06
+
     }
     render();
-    var controls = new THREE.OrbitControls(camera,renderer.domElement); //创建控件对象
+    var controls = new THREE.OrbitControls(camera, renderer.domElement); //创建控件对象
   </script>
 
 </body>

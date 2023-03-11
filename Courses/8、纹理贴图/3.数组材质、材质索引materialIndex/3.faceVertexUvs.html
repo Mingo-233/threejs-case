@@ -23,23 +23,41 @@
      * 创建场景对象Scene
      */
     var scene = new THREE.Scene();
-    var geometry = new THREE.PlaneGeometry(182, 71); //矩形平面
-    // 创建video对象
-    let video = document.createElement('video');
-    video.src = "1086x716.mp4"; // 设置视频地址
-    video.autoplay = "autoplay"; //要设置播放
-    // video对象作为VideoTexture参数创建纹理对象
-    var texture = new THREE.VideoTexture(video)
-    console.log(texture)
-    texture.minFilter = THREE.LinearFilter
-    // texture.minFilter = THREE.NearestFilter
+    /**
+     * 创建网格模型
+     */
+    const geometry = new THREE.BoxGeometry(100, 100, 100);
 
+    for (let i = 0; i < geometry.faces.length; i++) {
+      const face = geometry.faces[i];
+      face.vertexColors[0] = new THREE.Color().setHSL(Math.random(), 1, 0.5);
+      face.vertexColors[1] = new THREE.Color().setHSL(Math.random(), 1, 0.5);
+      face.vertexColors[2] = new THREE.Color().setHSL(Math.random(), 1, 0.5);
+    }
 
-    var material = new THREE.MeshPhongMaterial({
-      map: texture, // 设置纹理贴图
-    }); //材质对象Material
-    var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-    scene.add(mesh); //网格模型添加到场景中
+    geometry.faceVertexUvs[0] = [];
+    geometry.faceVertexUvs[1] = [];
+
+    const uvs1 = [new THREE.Vector2(0, 0), new THREE.Vector2(0, 1), new THREE.Vector2(1, 1)];
+
+    const uvs2 = [new THREE.Vector2(0, 0), new THREE.Vector2(1, 1), new THREE.Vector2(1, 0)];
+
+    for (let i = 0; i < geometry.faces.length; i += 2) {
+      geometry.faceVertexUvs[0][i] = [uvs1[0], uvs1[1], uvs1[2]];
+      // geometry.faceVertexUvs[1][i] = [uvs2[0], uvs2[1], uvs2[2]];
+      geometry.faceVertexUvs[0][i + 1] = [uvs2[0], uvs2[1], uvs2[2]];
+      // geometry.faceVertexUvs[1][i + 1] = [uvs1[0], uvs1[1], uvs1[2]];
+    }
+    const material = new THREE.MeshBasicMaterial({
+      vertexColors: THREE.VertexColors,
+      side: THREE.DoubleSide,
+      wireframe: false
+    });
+
+    console.log(geometry.faceVertexUvs);
+    const mesh = new THREE.Mesh(geometry, material);
+
+    scene.add(mesh)
     /**
      * 光源设置
      */
@@ -48,7 +66,7 @@
     point.position.set(400, 200, 300); //点光源位置
     scene.add(point); //点光源添加到场景中
     //环境光
-    var ambient = new THREE.AmbientLight(0xaaaaaa);
+    var ambient = new THREE.AmbientLight(0x444444);
     scene.add(ambient);
     /**
      * 相机设置
@@ -73,8 +91,6 @@
     function render() {
       renderer.render(scene, camera); //执行渲染操作
       requestAnimationFrame(render);
-      // 放在这边是因为 视频加载是异步的,不知道什么时候加载完成
-      texture.needsUpdate = true;
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性

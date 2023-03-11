@@ -39,13 +39,14 @@
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     // uv两个方向纹理重复数量
-    texture.repeat.set(4, 2);
+    texture.repeat.set(3, 2);
     // 偏移效果
-    // texture.offset = new THREE.Vector2(0.5, 0.5)
+    texture.offset = new THREE.Vector2(0.5, 0)
 
     var material = new THREE.MeshLambertMaterial({
       // 设置纹理贴图：Texture对象作为材质map属性的属性值
       map: texture,
+      side: THREE.DoubleSide
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中
@@ -85,7 +86,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>

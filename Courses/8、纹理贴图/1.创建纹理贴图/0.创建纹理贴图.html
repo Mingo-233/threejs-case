@@ -32,7 +32,7 @@
     // TextureLoader创建一个纹理加载器对象，可以加载图片作为几何体纹理
     var textureLoader = new THREE.TextureLoader();
     // 执行load方法，加载纹理贴图成功后，返回一个纹理对象Texture
-    textureLoader.load('Earth.png', function(texture) {
+    textureLoader.load('Earth.png', function (texture) {
       console.log(texture);
       var material = new THREE.MeshLambertMaterial({
         // color: 0x0000ff,
@@ -81,7 +81,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>

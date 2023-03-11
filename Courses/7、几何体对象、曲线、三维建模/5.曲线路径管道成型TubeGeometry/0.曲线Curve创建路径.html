@@ -38,7 +38,7 @@
     // TubeGeometry对2D曲线支持不太好
     // var path = new THREE.LineCurve(new THREE.Vector2(0, 100), new THREE.Vector2(0, 0));
     // path:路径   40：沿着轨迹细分数  2：管道半径   25：管道截面圆细分数
-    var geometry = new THREE.TubeGeometry(path, 40, 2, 25);
+    var geometry = new THREE.TubeGeometry(path, 400, 2, 25);
     // 控制台查看的TubeBufferGeometry结构
     // console.log(geometry.attributes.position);
     // console.log(geometry.index);
@@ -84,7 +84,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>

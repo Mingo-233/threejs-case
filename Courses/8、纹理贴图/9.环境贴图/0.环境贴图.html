@@ -26,8 +26,8 @@
     /**
      * 创建网格模型
      */
-    // var geometry = new THREE.BoxGeometry(100, 100, 100); //立方体
-    var geometry = new THREE.SphereGeometry(100, 35, 35); //球体
+    var geometry = new THREE.BoxGeometry(100, 100, 100); //立方体
+    // var geometry = new THREE.SphereGeometry(100, 35, 35); //球体
 
     var loader = new THREE.CubeTextureLoader();
     // 所有贴图在同一目录下，可以使用该方法设置共用路径
@@ -39,7 +39,7 @@
     var material = new THREE.MeshPhongMaterial({
       envMap: CubeTexture, //设置环境贴图
       // 环境贴图反射率
-      // reflectivity: 0.5,
+      reflectivity: 0.8,
     });
     console.log(CubeTexture.image);
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
@@ -80,7 +80,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>

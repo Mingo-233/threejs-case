@@ -32,12 +32,13 @@
     // TextureLoader创建一个纹理加载器对象，可以加载图片作为几何体纹理
     var textureLoader = new THREE.TextureLoader();
     // 加载法线贴图
+    // var textureNormal = textureLoader.load('./法线贴图/2.jpg');
     var textureNormal = textureLoader.load('./法线贴图/3_256.jpg');
     var material = new THREE.MeshPhongMaterial({
       color: 0xff0000,
       normalMap: textureNormal, //法线贴图
       //设置深浅程度，默认值(1,1)。
-      normalScale: new THREE.Vector2(3, 3),
+      normalScale: new THREE.Vector2(4, 4),
     }); //材质对象Material
     var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中
@@ -78,7 +79,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>

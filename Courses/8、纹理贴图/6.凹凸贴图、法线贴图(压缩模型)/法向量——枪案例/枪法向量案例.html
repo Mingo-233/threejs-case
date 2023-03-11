@@ -12,9 +12,9 @@
     }
   </style>
   <!--引入three.js三维引擎-->
-  <script src="../http://www.yanhuangxueyuan.com/versions/threejsR92/build/three.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/build/three.js"></script>
   <!-- 引入threejs扩展控件OrbitControls.js -->
-  <script src="../http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/controls/OrbitControls.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/controls/OrbitControls.js"></script>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
      * 创建网格模型
      */
     var loader = new THREE.ObjectLoader();
-    loader.load('model.json', function(mesh) {
+    loader.load('model.json', function (mesh) {
       console.log(mesh);
       var textureLoader = new THREE.TextureLoader();
       // 加载纹理贴图
@@ -80,7 +80,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>

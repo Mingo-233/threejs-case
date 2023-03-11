@@ -32,7 +32,7 @@
     canvas.height = 128;
     var c = canvas.getContext('2d');
     // 矩形区域填充背景
-    c.fillStyle = "#ff00ff";
+    c.fillStyle = "#9f88ff";
     c.fillRect(0, 0, 512, 128);
     c.beginPath();
     // 文字
@@ -42,7 +42,7 @@
     c.font = "bold 48px 宋体"; //字体样式设置
     c.textBaseline = "middle"; //文本与fillText定义的纵坐标
     c.textAlign = "center"; //文本居中(以fillText定义的横坐标)
-    c.fillText("郭隆邦_技术博客", 0, 0);
+    c.fillText("mingo_", 0, 0);
 
     // canvas画布对象作为CanvasTexture的参数重建一个纹理对象
     // canvas画布可以理解为一张图片
@@ -92,7 +92,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>

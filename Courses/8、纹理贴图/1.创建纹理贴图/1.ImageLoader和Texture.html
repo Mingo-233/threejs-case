@@ -30,11 +30,12 @@
     // 图片加载器
     var ImageLoader = new THREE.ImageLoader();
     // load方法回调函数，按照路径加载图片，返回一个html的元素img对象
-    ImageLoader.load('Earth.png', function(img) {
+    ImageLoader.load('Earth.png', function (img) {
       console.log(img);
       console.dir(img);
       // image对象作为参数，创建一个纹理对象Texture
       var texture = new THREE.Texture(img);
+      console.log(texture);
       // 下次使用纹理时触发更新
       texture.needsUpdate = true;
       var material = new THREE.MeshLambertMaterial({
@@ -80,7 +81,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>

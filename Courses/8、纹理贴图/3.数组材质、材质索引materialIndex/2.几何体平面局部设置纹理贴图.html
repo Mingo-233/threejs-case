@@ -27,6 +27,9 @@
      * 创建网格模型
      */
     var geometry = new THREE.PlaneGeometry(204, 102, 4, 4); //矩形平面
+
+    var boxGeometry = new THREE.BoxGeometry(100, 100, 100)
+    console.log('boxGeometry', boxGeometry.faceVertexUvs);
     // 材质对象1
     var material1 = new THREE.MeshPhongMaterial({
       color: 0xffff3f,
@@ -40,8 +43,9 @@
     var uv1 = [t0, t1, t3]; //选中图片一个三角区域像素——映射到三角面1
     var uv2 = [t1, t2, t3]; //选中图片一个三角区域像素——映射到三角面2
     // 如果不改变face3对应faceVertexUvs对应的坐标值，将会使用Plane接口默认的纹理坐标
-    geometry.faceVertexUvs[0][4] = uv1
-    geometry.faceVertexUvs[0][5] = uv2
+    console.log(geometry.faceVertexUvs);
+    geometry.faceVertexUvs[0][6] = uv1
+    geometry.faceVertexUvs[0][7] = uv2
     // 加载纹理
     var textureLoader = new THREE.TextureLoader();
     // 执行load方法，加载纹理贴图成功后，返回一个纹理对象Texture
@@ -50,17 +54,19 @@
     var material2 = new THREE.MeshPhongMaterial({
       // color: 0x0000ff,
       // wireframe:true,
-      map:texture,//设置纹理
+      map: texture,//设置纹理
     }); //材质对象Material
     // 数组材质
     var materialArr = [material1, material2];
     // 设置几何体的材质索引(对于PlaneGeometry而言所有Face3的材质索引默认0)
-    geometry.faces[4].materialIndex = 1;
-    geometry.faces[5].materialIndex = 1;
+    geometry.faces[6].materialIndex = 1;
+    geometry.faces[7].materialIndex = 1;
     var mesh = new THREE.Mesh(geometry, materialArr); //网格模型对象Mesh
     scene.add(mesh); //网格模型添加到场景中
 
-
+    var mesh2 = new THREE.Mesh(boxGeometry, material1)
+    scene.add(mesh2);
+    console.log(mesh2);
     /**
      * 光源设置
      */
@@ -97,7 +103,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     controls.addEventListener('change', render);
   </script>

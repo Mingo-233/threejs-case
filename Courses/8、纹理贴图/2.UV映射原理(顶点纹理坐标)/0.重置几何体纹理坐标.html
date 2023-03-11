@@ -29,6 +29,7 @@
     // var geometry = new THREE.PlaneGeometry(204, 102); //矩形平面
     // 矩形平面 设置细分数2,2  此时将有8个三角面
     var geometry = new THREE.PlaneGeometry(204, 102, 2, 2);
+    console.log(geometry);
     // 查看默认的uv坐标
     console.log(geometry.faceVertexUvs[0]);
     /**
@@ -52,23 +53,27 @@
     // 设置第五、第六个三角面对应的纹理坐标  
     // （本来这个几何体第三、四个纹理坐标点对应的自己的位置是0.5,1 - 0.5，0.5 - 1，1，也就是贴图的这些坐标所对应的图片信息，
     // 但是此时，我们把贴图 新的坐标赋给了几何体第三第四个纹理，所以原本几何体这个部位就显示了一张完整的但是缩小版的体贴）
-    geometry.faceVertexUvs[0][2] = uv1
-    geometry.faceVertexUvs[0][3] = uv2
+    geometry.faceVertexUvs[0][6] = uv1
+    geometry.faceVertexUvs[0][7] = uv2
 
     // TextureLoader创建一个纹理加载器对象，可以加载图片作为几何体纹理
     var textureLoader = new THREE.TextureLoader();
     // 执行load方法，加载纹理贴图成功后，返回一个纹理对象Texture
-    textureLoader.load('Earth.png', function(texture) {
+    textureLoader.load('Earth.png', function (texture) {
       var material = new THREE.MeshLambertMaterial({
         // color:0x000000,
         map: texture,// 设置纹理贴图
-        // wireframe:true,
+        side: THREE.DoubleSide
+        // wireframe: true,
       }); //材质对象Material
       var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+      console.log(mesh);
+      mesh.position.set(102, 51, 0)
+
       scene.add(mesh); //网格模型添加到场景中
     })
-        // 坐标系辅助显示
-        var axesHelper = new THREE.AxesHelper(200);
+    // 坐标系辅助显示
+    var axesHelper = new THREE.AxesHelper(200);
     scene.add(axesHelper);
     /**
      * 光源设置
@@ -106,7 +111,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>

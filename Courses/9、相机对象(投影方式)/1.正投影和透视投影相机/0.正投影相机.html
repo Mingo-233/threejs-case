@@ -58,7 +58,15 @@
     var s = 250; //三维场景显示范围控制系数，系数越大，显示的范围越大
     console.log(k);
     //创建相机对象
+    // left	渲染空间的左边界
+    // right	渲染空间的右边界
+    // top	渲染空间的上边界
+    // bottom	渲染空间的下边界
+    // near	near属性表示的是从距离相机多远的位置开始渲染，一般情况会设置一个很小的值。 默认值0.1
+    // far	far属性表示的是距离相机多远的位置截止渲染，如果设置的值偏小小，会有部分场景看不到。 默认值1000
     var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+
+    // 注意  左右边界的距离与上下边界的距离比值与画布的渲染窗口的宽高比例要一致，否则三维模型的显示效果会被单方向不等比例拉伸
     camera.position.set(200, 300, 200); //设置相机位置
     console.log(scene.position);
 
@@ -76,14 +84,14 @@
     document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
 
     // 渲染函数
-    function render () {
+    function render() {
       renderer.render(scene, camera);//执行渲染操作
       requestAnimationFrame(render);//请求再次执行渲染函数render，渲染下一帧
-      
+
     }
     setTimeout(() => {
-    camera.lookAt(mesh.position); //设置相机方向(指向的场景对象)
-      
+      camera.lookAt(mesh.position); //设置相机方向(指向的场景对象)
+
     }, 1000);
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性

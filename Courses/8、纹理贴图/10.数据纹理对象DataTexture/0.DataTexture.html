@@ -41,7 +41,7 @@
     var texture = new THREE.DataTexture(data, width, height, THREE.RGBFormat);
     texture.needsUpdate = true; //纹理更新
     //打印纹理对象的image属性
-    // console.log(texture.image);
+    console.log(texture);
 
     var material = new THREE.MeshPhongMaterial({
       map: texture, // 设置纹理贴图
@@ -84,7 +84,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
     //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
     // controls.addEventListener('change', render);
   </script>
