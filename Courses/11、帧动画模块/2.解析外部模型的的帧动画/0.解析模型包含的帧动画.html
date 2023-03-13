@@ -8,12 +8,14 @@
     body {
       margin: 0;
       overflow: hidden;
-       /* //隐藏body窗口区域滚动条 */
+      /* //隐藏body窗口区域滚动条 */
     }
   </style>
   <!--引入three.js三维引擎-->
   <!-- <script src="http://www.yanhuangxueyuan.com/3D/example/three.min.js"></script> -->
-  <script src="https://threejs.org/build/three.js"></script>
+  <!-- <script type="module" src="https://threejs.org/build/three.js"></script> -->
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/build/three.js"></script>
+
   <!--引入轨道控件OrbitControls.js-->
   <script src="http://www.yanhuangxueyuan.com/3D/example/OrbitControls.js"></script>
 </head>
@@ -30,7 +32,7 @@
     var loader = new THREE.ObjectLoader();
     var mixer = null; //声明一个混合器变量
     // 加载文件返回一个对象obj
-    loader.load("model.json", function(obj) {
+    loader.load("model.json", function (obj) {
       console.log(obj)
       obj.scale.set(15, 15, 15);
       scene.add(obj);
@@ -38,6 +40,7 @@
       mixer = new THREE.AnimationMixer(obj);
       // obj.animations[0]：获得剪辑clip对象
       // // 剪辑clip作为参数，通过混合器clipAction方法返回一个操作对象AnimationAction
+      console.log(obj.animations);
       var AnimationAction = mixer.clipAction(obj.animations[0]);
       // AnimationAction.loop = THREE.LoopOnce; //不循环播放
       // AnimationAction.clampWhenFinished=true;//暂停在最后一帧播放的状态
@@ -84,7 +87,7 @@
       renderer.render(scene, camera); //执行渲染操作
       requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
 
-      if(mixer!==null){
+      if (mixer !== null) {
         //clock.getDelta()方法获得两帧的时间间隔
         // 更新混合器相关的时间
         mixer.update(clock.getDelta());
@@ -92,7 +95,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
   </script>
 
 </body>

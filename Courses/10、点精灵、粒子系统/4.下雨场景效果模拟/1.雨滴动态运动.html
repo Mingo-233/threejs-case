@@ -34,12 +34,15 @@
     for (let i = 0; i < 200; i++) {
       var spriteMaterial = new THREE.SpriteMaterial({
         map: textureTree, //设置精灵纹理贴图
+        rotation: Math.PI / 8
+
       });
       // 创建精灵模型对象
       var sprite = new THREE.Sprite(spriteMaterial);
       group.add(sprite);
       // 控制精灵大小,
       sprite.scale.set(8, 10, 1); //// 只需要设置x、y两个分量就可以
+
       var k1 = Math.random() - 0.5;
       var k2 = Math.random() - 0.5;
       // 设置精灵模型位置，在一个长方体空间中随机分布
@@ -95,7 +98,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
   </script>
 
 </body>

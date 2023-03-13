@@ -31,13 +31,13 @@
     // 文件加载对象
     var loader = new THREE.FileLoader().setResponseType('json');
     // 加载PM2.5数据
-    loader.load('数据.json', function(data) {
+    loader.load('数据.json', function (data) {
       //遍历数据
       data.forEach(elem => {
         let geometry = new THREE.Geometry()
         let material = new THREE.PointsMaterial({
-          // map:texture,
-          color: 0xff00ff,
+          map: texture,
+          // color: 0xff00ff,
           size: 4,
         })
         // vector3表示一个城市坐标
@@ -89,7 +89,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
   </script>
 
 </body>
