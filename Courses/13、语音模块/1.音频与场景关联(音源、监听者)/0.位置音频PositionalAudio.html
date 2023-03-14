@@ -75,7 +75,7 @@
     }
     render();
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
-    var controls = new THREE.OrbitControls(camera,renderer.domElement);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     // 创建一个虚拟的监听者
     var listener = new THREE.AudioListener();
@@ -88,7 +88,7 @@
     // 创建一个音频加载器
     var audioLoader = new THREE.AudioLoader();
     // 加载音频文件，返回一个音频缓冲区对象作为回调函数参数
-    audioLoader.load('./中国人.mp3', function(AudioBuffer) {
+    audioLoader.load('./中国人.mp3', function (AudioBuffer) {
       // console.log(buffer);
       // 音频缓冲区对象关联到音频对象audio
       PosAudio.setBuffer(AudioBuffer);
@@ -97,7 +97,7 @@
       PosAudio.play(); //播放
     });
 
-    function handle(){
+    function handle() {
       console.log(PosAudio);
       PosAudio.start(); //播放
 
